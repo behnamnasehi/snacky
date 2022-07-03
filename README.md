@@ -6,7 +6,7 @@ Snacky inform users of a process that an app has performed or will perform. They
 
 ## Installation
 
-### Step 1:
+### Step 1 :
 
 Add the JitPack repository to your build file 
 
@@ -20,7 +20,7 @@ Add it in your root build.gradle at the end of repositories:
 		}
 	}
 ```
-### Step 2:
+### Step 2 :
 
 Add the dependency
 
@@ -31,81 +31,50 @@ Add the dependency
 ```
 
 ## implementation
-EncryptedSharedPreferences Class.java
+First create your instance and give name to it :
+
+### Default :
+```java
+Snacky.createInstance(this);
+```
+
+### Custom :
+```java
+Snacky.createInstance(this, "Error", false, new DesignBuilder.Builder()
+              .setSubtitleTextColor(R.color.white)
+              .setSubtitleTextSize(12)
+              .setTitleTextColor(R.color.white)
+              .setTitleTextSize(16)
+              .setUndoTitleTextColor(R.color.white)
+              .setUndoTextSize(14)
+              .isRtl(false)
+              .setBackgroundColor(R.color.black)
+              .setSubtitleTypeface("PATH-TO-YOUR-FONT")
+              .setTitleTypeface("PATH-TO-YOUR-FONT")
+              .setUndoTypeface("PATH-TO-YOUR-FONT")
+              .setBackgroundRadius(12)
+              .build());
+```
+
+and add view to your activity :
 
 ```java
-public class EncryptedDataHolder {
-
-    private static final String KEY_API_KEY = "api_key";
-    private static final String KEY_STORE_ALIAS = "MyEncryptedSharedPreferences";
-
-    private SharedPreferences pref;
-    private SharedPreferences.Editor editor;
-
-
-    @RequiresApi(api = Build.VERSION_CODES.M)
-    private KeyGenParameterSpec createKeyGenParameterSpec() {
-        return new KeyGenParameterSpec.Builder(
-                KEY_STORE_ALIAS,
-                KeyProperties.PURPOSE_ENCRYPT | KeyProperties.PURPOSE_DECRYPT
-        ).setBlockModes(KeyProperties.BLOCK_MODE_GCM)
-                .setEncryptionPaddings(KeyProperties.ENCRYPTION_PADDING_NONE)
-                .setKeySize(256)
-                .build();
-    }
-
-    @RequiresApi(api = Build.VERSION_CODES.M)
-    private MasterKey getMasterKey(Context context, KeyGenParameterSpec keyGenParameterSpec) throws GeneralSecurityException, IOException {
-        return new MasterKey.Builder(context, KEY_STORE_ALIAS)
-                .setKeyGenParameterSpec(keyGenParameterSpec)
-                .build();
-    }
-
-    @RequiresApi(api = Build.VERSION_CODES.M)
-    public EncryptedDataHolder(Context context) {
-        try {
-            pref = androidx.security.crypto.EncryptedSharedPreferences.create(
-                    context,
-                    KEY_STORE_ALIAS,
-                    getMasterKey(context, createKeyGenParameterSpec()),
-                    androidx.security.crypto.EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
-                    androidx.security.crypto.EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
-            );
-            editor = pref.edit();
-            editor.apply();
-        } catch (GeneralSecurityException | IOException e) {
-            e.printStackTrace();
-        }
-
-    }
-
-    public String getApiKey() {
-        return pref.getString(KEY_API_KEY, "");
-    }
-
-    public void setApiKey(String apiKey) {
-        editor.putString(KEY_API_KEY, apiKey);
-        editor.apply();
-        editor.commit();
-    }
-
-}
+addContentView(Snacky.getInstance("Error"), LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, LayoutHelper.WRAP_CONTENT, Gravity.BOTTOM | Gravity.START, 20, 0, 20, 8));
 ```
+
 ## Usage
 
-```java
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            encryptedDataHolder = new EncryptedDataHolder(this);
-        }
-        encryptedDataHolder.setApiKey("this is test from Behnam Nasehi");
 
-        TextView textView = findViewById(R.id.txt);
-        textView.setText(encryptedDataHolder.getApiKey());
+### Default :
+```java
+Snacky.getInstance().make("Something went wrong !", "Please try again and send this requet again to server for test", Snacky.LENGTH_LONG, "Done").start();
+```
+
+### Custom :
+```java
+Snacky.getInstance("Error").make("Something went wrong !", "Please try again and send this requet again to server for test", Snacky.LENGTH_LONG, "Done").start();
 ```
 
 ## Contact Me 
-Telegram : [Click Here For Opening My Telegram Profile](https://t.me/behnamnasehii)
 
-Virgul : [Click Here For Opening My Virgul Profile](https://virgool.io/@behnamnasehi)
-
-Medium: [Click Here For Opening My Medium Profile](https://medium.com/@behnammnasehi)
+Linkedin: [Click Here](https://www.linkedin.com/in/behnamnasehi/)
