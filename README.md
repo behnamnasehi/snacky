@@ -13,21 +13,21 @@ Add the JitPack repository to your build file
 Add it in your root build.gradle at the end of repositories:
 
 ```bash
-	allprojects {
-		repositories {
-			...
-			maven { url 'https://jitpack.io' }
-		}
+allprojects {
+	repositories {
+		...
+		maven { url 'https://jitpack.io' }
 	}
+}
 ```
 ### Step 2 :
 
 Add the dependency
 
 ```bash
-	dependencies {
-	        implementation 'com.github.behnamnasehi:snacky:lastest'
-	}
+dependencies {
+	implementation 'com.github.behnamnasehi:snacky:lastest'
+}
 ```
 
 ## implementation
@@ -59,7 +59,15 @@ Snacky.createInstance(this, "Error", false, new DesignBuilder.Builder()
 and add view to your activity :
 
 ```java
-addContentView(Snacky.getInstance("Error"), LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, LayoutHelper.WRAP_CONTENT, Gravity.BOTTOM | Gravity.START, 20, 0, 20, 8));
+addContentView(
+	Snacky.getInstance("Error"),
+	LayoutHelper.createFrame(
+		LayoutHelper.MATCH_PARENT,
+		LayoutHelper.WRAP_CONTENT,
+		Gravity.BOTTOM | Gravity.START,
+		20, 0, 20, 8
+	)
+);
 ```
 
 ## Usage
@@ -67,12 +75,22 @@ addContentView(Snacky.getInstance("Error"), LayoutHelper.createFrame(LayoutHelpe
 
 ### Default :
 ```java
-Snacky.getInstance().make("Something went wrong !", "Please try again and send this requet again to server for test", Snacky.LENGTH_LONG, "Done").start();
+Snacky.getInstance().make(
+	"Something went wrong !",
+	"Please try again and send this requet again to server for test",
+	Snacky.LENGTH_LONG,
+	"Done"
+).start();
 ```
 
 ### Custom :
 ```java
-Snacky.getInstance("Error").make("Something went wrong !", "Please try again and send this requet again to server for test", Snacky.LENGTH_LONG, "Done").start();
+Snacky.getInstance("Error").make(
+	"Something went wrong !",
+	"Please try again and send this requet again to server for test",
+	Snacky.LENGTH_LONG,
+	"Done"
+).start();
 ```
 
 ## Contact Me 
