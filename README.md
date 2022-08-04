@@ -20,13 +20,25 @@ allprojects {
 	}
 }
 ```
+
+OR in ```setting.gradle```:
+```bash
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        maven { url 'https://jitpack.io' }
+        google()
+        mavenCentral()
+    }
+}
+```
 ### Step 2 :
 
 Add the dependency
 
 ```bash
 dependencies {
-	implementation 'com.github.behnamnasehi:snacky:lastest'
+	implementation 'com.github.behnamnasehi:snacky:1.0.0'
 }
 ```
 
