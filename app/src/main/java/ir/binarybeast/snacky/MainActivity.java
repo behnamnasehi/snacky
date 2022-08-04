@@ -26,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
         Button button = findViewById(R.id.btn);
 
 
+        Snacky.createInstance(this);
+
         Snacky.createInstance(this, "Error", false, new DesignBuilder.Builder()
                 .setSubtitleTextColor(R.color.white)
                 .setSubtitleTextSize(12)
@@ -33,8 +35,14 @@ public class MainActivity extends AppCompatActivity {
                 .setTitleTextSize(16)
                 .setUndoTitleTextColor(R.color.white)
                 .setUndoTextSize(14)
+                .isRtl(false)
+                .setBackgroundColor(R.color.black)
+                .setSubtitleTypeface("PATH-TO-YOUR-FONT")
+                .setTitleTypeface("PATH-TO-YOUR-FONT")
+                .setUndoTypeface("PATH-TO-YOUR-FONT")
                 .setBackgroundRadius(12)
                 .build());
+
         addContentView(Snacky.getInstance("Error"), LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, LayoutHelper.WRAP_CONTENT, Gravity.BOTTOM | Gravity.START, 20, 0, 20, 8));
         button.setOnClickListener(new View.OnClickListener() {
             @Override
